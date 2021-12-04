@@ -11,11 +11,26 @@ int main(){
 
     /*
     ---------------------------------------------------------------------------------------------------------------------------------------------------
-                                                    C O N T A I N E R - 3   :   S E T S
+                                                    C O N T A I N E R - 3   :   P A I R S
+    ---------------------------------------------------------------------------------------------------------------------------------------------------
+    */ 
+    
+    // Pairs is a container that stores any two things inside it -> It can be a pair of any two things 
+    // {int, int}, {int, string} -> Normal data types
+    // {int, pair}, {int,  pair<pair<int, int>, int> }  -> Even constructors
+
+    pair<int, int> p = {1, 2};
+    cout << p.first << " " <<  p.second << " ";
+
+    /*
+    ---------------------------------------------------------------------------------------------------------------------------------------------------
+                                                    C O N T A I N E R - 4   :   S E T S
     ---------------------------------------------------------------------------------------------------------------------------------------------------
     */ 
 
-    //                                                  3.A   :   O R D E R E D   S E T
+    //                                                  4.A   :   O R D E R E D   S E T
+
+    // -------------------------------------------------------------------------------------------------------------------------------------------
     
     // Ordered Set is a container in STL that stores only unique elements in an increasing order i.e element at index 0 will be the lowest and element at index (size - 1) will be the largest
     
@@ -83,11 +98,18 @@ int main(){
     auto position1 = s2.find(2);                                    // returns 4
     auto position2 = s2.find(8);                                    // returns s1.end() => {8}
     cout << &position1 << " " << &position2 << " " << endl;         // Size of int is 4
+
+    // 5. clear                                                     -> clears the entire size
+    s.clear();
+
+    // 6. count
+    s.count(21)                                                     // returns the no of occurences of entered element
     
     // Other Operations
     cout << s1.size() << " " << endl;                               // Returns the size of the set
     cout << s1.max_size() << " " << endl;                           // Returns the maximum size of the set possible
-    
+    swap(s, s1);                                                    // Swaps two sets
+
     auto begin = s2.begin();
     auto finish = s2.end();
     s2.erase(begin, finish);                                        // Erasing the entire set -> Clearing the set
@@ -96,7 +118,7 @@ int main(){
 
     // ====================================================================================================================================================
 
-    //                                                  3.B   :   U N O R D E R E D   S E T
+    //                                                  4.B   :   U N O R D E R E D   S E T
 
     // -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -108,7 +130,7 @@ int main(){
 
     // ====================================================================================================================================================
 
-    //                                                  3.C   :   M U L T I S E T
+    //                                                  4.C   :   M U L T I S E T
 
     // -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -153,6 +175,95 @@ int main(){
     // For an element not present in the multiset, It works same as ordered set
     auto position2 = s2.find(8);                                    // returns s1.end() => {8}
     cout << &position1 << " " << &position2 << " " << endl;         // Size of int is 4
+
+    /*
+    ---------------------------------------------------------------------------------------------------------------------------------------------------
+                                                    C O N T A I N E R - 5   :   M A P S
+    ---------------------------------------------------------------------------------------------------------------------------------------------------
+    */ 
+
+    //                                                  5.A   :   O R D E R E D     M A P 
+
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+
+    // Ordered Maps or simply Maps is a container in STL that stores key value pairs just like a dictionary. It stores all unique keys and also arranges all the pairs in a lexographical manner on the basis of key
+    // A Key value pair can be reassigned but its older key pair will be lost
+    // All operations of Maps takes O(logn) time complexity in average cases (almost all)
+
+    // Declaring and Initialising a map
+    map<string, int> m  {
+        {'Rohit', 1}, {'Prathmesh', 2}, {'Aniket', 3}, {'Sandesh', 4}, {'Prasad', 5}, {'Siddhesh', 6}
+    };
+    map<string, int>::iterator it;
+
+    // Traversing a Map
+
+    // Traditional Way (Iterator Approach)
+    for(it = m.begin(); it != m.end(); it++){
+        cout << it -> first << it -> second << " ";
+    }
+
+    // for each loop
+    for(auto it: m){
+        cout << it << " ";
+    }
+    
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+    
+    // Operations on Maps
+
+    // 1. Inserting into a map                                  -> using emplace
+    m.emplace("Max", 4);                    
+
+    // 2. Deleting from a Map
+    m.erase("Max");                                             // -> Deletes a single key value pair
+
+    auto start = m.begin();
+    auto end = m.begin();
+    end++;
+    end++
+    m.erase(start, end);                                       // -> Deletes a slice of key, value pairs
+
+    m.erase(m.begin(), m.end())                                // -> Deletes all key, value pairs
+
+    // 3. Finding a key in map
+    auto position = mp.find("Siddhesh");
+    cout << position -> first << " " << position -> second << " ";
+
+    // 4. Deleting the entire map making it empty
+    m.clear();                                                  // -> Empties the map
+
+    // Other operations
+    m.empty() : cout << "True -> Map is empty" : cout << "Map is empty";
+
+    // ====================================================================================================================================================
+
+    //                                                  5.B   :   U N O R D E R E D   M A P
+
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+
+    // UnOrdered Map is a container in STL that also stores only unique keys but the order is not fixed -> A key can be present at any position
+    // The Advantage of using UnOrdered map is: All operations of UnOrdered map takes a time complexity of O(1) in average case (almost all cases)
+    // All Operations of ordered map are same for UnOrdered set
+    // unordered map doesn't support pair container 
+
+    unordered_set<int, int> um;
+
+    // ====================================================================================================================================================
+
+    //                                                  5.C   :   M U L T I M A P
+
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+
+    // Multimap is a container in STL that allows us to store duplicate keys but being an map of ordered type - It also arranges all the keys in an lexograpghic fashion
+    // All Operations of multimap also takes a time complexity of O(logn) in all cases 
+
+    multimap<string, int> mm;
+
+    // Difference in Multimaps
+    mm.erase("Siddhesh");                                 // Deletes all the occurences of key value pair whose key is Siddhesh
+
+    mm.find("Siddhesh");                                  // Returns the first occurence of key
 
     return 0;
 }
